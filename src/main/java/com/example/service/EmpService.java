@@ -52,4 +52,9 @@ public class EmpService {
             throw e;  // Re-throw the exception or handle accordingly
         }
     }
+
+    public Emp getEmpId(int id)
+    {
+        return this.empRepository.findById(id).get();
+    }
 }

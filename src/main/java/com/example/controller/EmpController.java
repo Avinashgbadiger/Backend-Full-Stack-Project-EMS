@@ -58,4 +58,21 @@ public class EmpController {
             return new ResponseEntity<>("Error fetching employees", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getEmpById(@PathVariable int id)
+    {
+        logger.info("Received request to fetch employee by his employee Id");
+
+        try{
+            Emp empId = this.empService.getEmpId(id);
+            logger.info("Recived {} employee details ",empId.getId());
+            return  new ResponseEntity<>(empId,HttpStatus.FOUND);
+        }catch (Exception e)
+        {
+            logger.error("Error - Emp with EmpId : "+id+" did not found");
+            return new ResponseEntity<>("Error unable to find Employee with empId "+id,HttpStatus.NOT_FOUND);
+        }
+    }
 }
