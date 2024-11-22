@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmpService {
@@ -24,6 +25,12 @@ public class EmpService {
      * @param emp the employee to save
      * @return saved employee entity
      */
+
+    // Example of getting employee by ID in the service class
+    public Optional<Emp> gettingEmpById(int id) {
+        return empRepository.findById(id); // Assuming you're using Spring Data JPA
+    }
+
     public Emp savingEmp(Emp emp) {
         logger.info("Attempting to save employee with ID: {}", emp.getId()); // Log the ID of the employee being saved
         try {
@@ -51,5 +58,15 @@ public class EmpService {
             logger.error("Error occurred while fetching employees.", e);  // Log error if something goes wrong
             throw e;  // Re-throw the exception or handle accordingly
         }
+
+
+    }
+
+    public Emp updateEmpById(int id, Emp emp) {
+        Optional<Emp> byId = this.empRepository.findById(id);
+        if (byId.isPresent()) {
+            emp.setId(id);
+            return this.empRepository.save(emp);
+        } else return this.empRepository.findById(id).get();
     }
 }
