@@ -70,8 +70,12 @@ public class EmpService {
         } else return this.empRepository.findById(id).get();
     }
 
-    public Emp getEmpId(int id)
-    {
+    public Emp getEmpId(int id) {
         return this.empRepository.findById(id).get();
+    }
+
+    public void deleteEmpId(int id)
+    {
+        this.empRepository.deleteById(id);
     }
 }

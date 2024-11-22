@@ -60,7 +60,7 @@ public class EmpController {
         }
     }
 
- 
+
     /**
      * Endpoint to get employee by ID.
      *
@@ -89,8 +89,16 @@ public class EmpController {
     public ResponseEntity<?> updatingEmp(@PathVariable int id, @RequestBody Emp emp) {
         Emp emp1 = this.empService.updateEmpById(id, emp);
         return new ResponseEntity<>(emp1, HttpStatus.ACCEPTED);
- 
- 
- 
+
+
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable int id) {
+        this.empService.deleteEmpId(id);
+
+        return new ResponseEntity<>("Emp With id : " + id + " has deleted successfully", HttpStatus.NO_CONTENT);
+
     }
 }
