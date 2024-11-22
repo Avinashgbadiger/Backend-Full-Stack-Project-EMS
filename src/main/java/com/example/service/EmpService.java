@@ -69,4 +69,9 @@ public class EmpService {
             return this.empRepository.save(emp);
         } else return this.empRepository.findById(id).get();
     }
+
+    public Emp getEmpId(int id)
+    {
+        return this.empRepository.findById(id).get();
+    }
 }
